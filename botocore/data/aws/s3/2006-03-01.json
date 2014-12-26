@@ -1,7 +1,7 @@
 {
     "api_version": "2006-03-01",
     "type": "rest-xml",
-    "signature_version": "s3",
+    "signature_version": "s3v4",
     "timestamp_format": "rfc822",
     "checksum_format": "md5",
     "service_full_name": "Amazon Simple Storage Service",
