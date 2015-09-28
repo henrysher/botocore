@@ -14,9 +14,9 @@ import logging
 
 from six import string_types, text_type
 
-from botocore.exceptions import InvalidExpressionError, ConfigNotFound
-from botocore.compat import json, quote
-from botocore.vendored import requests
+from botocorev063p.exceptions import InvalidExpressionError, ConfigNotFound
+from botocorev063p.compat import json, quote
+from botocorev063p.vendored import requests
 
 
 logger = logging.getLogger(__name__)

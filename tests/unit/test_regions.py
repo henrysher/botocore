@@ -15,8 +15,8 @@ from tests import unittest, BaseSessionTest, create_session
 import mock
 from nose.tools import assert_equals
 
-from botocore import regions
-from botocore.exceptions import UnknownEndpointError
+from botocorev063p import regions
+from botocorev063p.exceptions import UnknownEndpointError
 
 
 # NOTE: sqs endpoint updated to be the CN in the SSL cert because

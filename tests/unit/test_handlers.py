@@ -17,11 +17,11 @@ import base64
 import six
 import mock
 
-import botocore.session
-from botocore.hooks import first_non_none_response
-from botocore.compat import quote
-from botocore.handlers import copy_snapshot_encrypted
-from botocore.handlers import check_for_200_error
+import botocorev063p.session
+from botocorev063p.hooks import first_non_none_response
+from botocorev063p.compat import quote
+from botocorev063p.handlers import copy_snapshot_encrypted
+from botocorev063p.handlers import check_for_200_error
 
 
 class TestHandlers(BaseSessionTest):
@@ -197,7 +197,7 @@ class TestRetryHandlerOrder(BaseSessionTest):
             attempts=1, caught_exception=None)
         # This is implementation specific, but we're trying to verify that
         # the check_for_200_error is before any of the retry logic in
-        # botocore.retryhandlers.
+        # botocorev063p.retryhandlers.
         # Technically, as long as the relative order is preserved, we don't
         # care about the absolute order.
         names = self.get_handler_names(responses)

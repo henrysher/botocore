@@ -23,10 +23,10 @@ import sys
 from mock import Mock, patch
 import six
 
-from botocore.exceptions import UnseekableStreamError
-from botocore.awsrequest import AWSRequest
-from botocore.awsrequest import AWSHTTPConnection
-from botocore.compat import file_type
+from botocorev063p.exceptions import UnseekableStreamError
+from botocorev063p.awsrequest import AWSRequest
+from botocorev063p.awsrequest import AWSHTTPConnection
+from botocorev063p.compat import file_type
 
 
 class FakeSocket(object):
@@ -291,7 +291,7 @@ class TestAWSHTTPConnection(unittest.TestCase):
         conn.sock = s
         # Test that the standard library method was used by patching out
         # the ``_tunnel`` method and seeing if the std lib method was called.
-        with patch('botocore.vendored.requests.packages.urllib3.connection.'
+        with patch('botocorev063p.vendored.requests.packages.urllib3.connection.'
                    'HTTPConnection._tunnel') as mock_tunnel:
             conn._tunnel()
             self.assertTrue(mock_tunnel.called)

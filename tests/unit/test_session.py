@@ -21,9 +21,9 @@ import shutil
 
 import mock
 
-import botocore.session
-import botocore.exceptions
-from botocore.hooks import EventHooks
+import botocorev063p.session
+import botocorev063p.exceptions
+from botocorev063p.hooks import EventHooks
 
 
 class BaseSessionTest(unittest.TestCase):
@@ -52,7 +52,7 @@ class BaseSessionTest(unittest.TestCase):
 class SessionTest(BaseSessionTest):
 
     def close_log_file_handler(self, tempdir, filename):
-        logger = logging.getLogger('botocore')
+        logger = logging.getLogger('botocorev063p')
         handlers = logger.handlers
         for handler in handlers[:]:
             if hasattr(handler, 'stream') and handler.stream.name == filename:
@@ -85,7 +85,7 @@ class SessionTest(BaseSessionTest):
         # Given we have no profile:
         self.environ['FOO_PROFILE'] = 'profile_that_does_not_exist'
         session = create_session(session_vars=self.env_vars)
-        with self.assertRaises(botocore.exceptions.ProfileNotFound):
+        with self.assertRaises(botocorev063p.exceptions.ProfileNotFound):
             session.get_scoped_config()
 
     def test_variable_does_not_exist(self):
@@ -116,7 +116,7 @@ class SessionTest(BaseSessionTest):
         # In this case, even though we specified default, because
         # the boto_config_empty config file does not have a default
         # profile, we should be raising an exception.
-        with self.assertRaises(botocore.exceptions.ProfileNotFound):
+        with self.assertRaises(botocorev063p.exceptions.ProfileNotFound):
             session.get_scoped_config()
 
     def test_file_logger(self):
@@ -185,17 +185,17 @@ class SessionTest(BaseSessionTest):
         self.assertEqual(event, 'after-parsed.foo.bar.fie.baz')
         event = self.session.create_event('service-created')
         self.assertEqual(event, 'service-created')
-        self.assertRaises(botocore.exceptions.EventNotFound,
+        self.assertRaises(botocorev063p.exceptions.EventNotFound,
                           self.session.create_event, 'foo-bar')
 
     @mock.patch('logging.getLogger')
     @mock.patch('logging.FileHandler')
     def test_logger_name_can_be_passed_in(self, file_handler, get_logger):
-        self.session.set_debug_logger('botocore.hooks')
-        get_logger.assert_called_with('botocore.hooks')
+        self.session.set_debug_logger('botocorev063p.hooks')
+        get_logger.assert_called_with('botocorev063p.hooks')
 
-        self.session.set_file_logger('DEBUG', 'debuglog', 'botocore.service')
-        get_logger.assert_called_with('botocore.service')
+        self.session.set_file_logger('DEBUG', 'debuglog', 'botocorev063p.service')
+        get_logger.assert_called_with('botocorev063p.service')
         file_handler.assert_called_with('debuglog')
 
     @mock.patch('logging.getLogger')
@@ -226,7 +226,7 @@ class TestBuiltinEventHandlers(BaseSessionTest):
             ('foo', self.on_foo),
         ]
         self.foo_called = False
-        self.handler_patch = mock.patch('botocore.handlers.BUILTIN_HANDLERS',
+        self.handler_patch = mock.patch('botocorev063p.handlers.BUILTIN_HANDLERS',
                                         self.builtin_handlers)
         self.handler_patch.start()
 
@@ -238,7 +238,7 @@ class TestBuiltinEventHandlers(BaseSessionTest):
         self.handler_patch.stop()
 
     def test_registered_builtin_handlers(self):
-        session = botocore.session.Session(self.env_vars, None,
+        session = botocorev063p.session.Session(self.env_vars, None,
                                            include_builtin_handlers=True)
         session.emit('foo')
         self.assertTrue(self.foo_called)

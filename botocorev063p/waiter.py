@@ -26,7 +26,7 @@ class Waiter(object):
     """Wait for a resource to reach a certain state.
 
     In addition to creating this class manually, you can
-    also use ``botocore.service.Service.get_waiter`` to
+    also use ``botocorev063p.service.Service.get_waiter`` to
     create an instance of ``Waiter```.
 
     The typical usage pattern is from a ``Service`` object::
@@ -46,7 +46,7 @@ class Waiter(object):
         :type name: str
         :param name: The name of the waiter.
 
-        :type operation: ``botocore.operation.Operation``
+        :type operation: ``botocorev063p.operation.Operation``
         :param operation:  The operation associated with the waiter.
             This is specified in the waiter configuration as the
             ``operation`` key.
@@ -81,7 +81,7 @@ class Waiter(object):
         The ``**kwargs`` passed to this method will be forwarded to the
         operation associated with the waiter.
 
-        :param endpoint:  An instance of ``botocore.endpoint.Endpoint``.
+        :param endpoint:  An instance of ``botocorev063p.endpoint.Endpoint``.
 
         """
         logger.debug("Waiter %s waiting.", self.name)

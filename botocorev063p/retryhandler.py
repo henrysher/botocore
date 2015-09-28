@@ -17,10 +17,10 @@ import functools
 import logging
 from binascii import crc32
 
-from botocore.vendored.requests import ConnectionError, Timeout
-from botocore.vendored.requests.packages.urllib3.exceptions import ClosedPoolError
+from botocorev063p.vendored.requests import ConnectionError, Timeout
+from botocorev063p.vendored.requests.packages.urllib3.exceptions import ClosedPoolError
 
-from botocore.exceptions import ChecksumError
+from botocorev063p.exceptions import ChecksumError
 
 
 logger = logging.getLogger(__name__)

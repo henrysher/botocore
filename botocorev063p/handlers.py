@@ -13,7 +13,7 @@
 
 """Builtin event handlers.
 
-This module contains builtin handlers for events emitted by botocore.
+This module contains builtin handlers for events emitted by botocorev063p.
 """
 
 import base64
@@ -23,10 +23,10 @@ import re
 
 import six
 
-from botocore.compat import urlsplit, urlunsplit, unquote, json, quote
-from botocore import retryhandler
-from botocore.payload import Payload
-import botocore.auth
+from botocorev063p.compat import urlsplit, urlunsplit, unquote, json, quote
+from botocorev063p import retryhandler
+from botocorev063p.payload import Payload
+import botocorev063p.auth
 
 
 logger = logging.getLogger(__name__)
@@ -157,7 +157,7 @@ def fix_s3_host(event_name, endpoint, request, auth, **kwargs):
     parts = urlsplit(request.url)
     auth.auth_path = parts.path
     path_parts = parts.path.split('/')
-    if isinstance(auth, botocore.auth.SigV4Auth):
+    if isinstance(auth, botocorev063p.auth.SigV4Auth):
         return
     if len(path_parts) > 1:
         bucket_name = path_parts[1]
@@ -274,7 +274,7 @@ def copy_snapshot_encrypted(operation, params, endpoint, **kwargs):
     # url based on the source endpoint.
     region = params['SourceRegion']
     source_endpoint = operation.service.get_endpoint(region)
-    presigner = botocore.auth.SigV4QueryAuth(
+    presigner = botocorev063p.auth.SigV4QueryAuth(
         credentials=source_endpoint.auth.credentials,
         region_name=region,
         service_name='ec2',

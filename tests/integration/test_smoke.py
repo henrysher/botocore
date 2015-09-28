@@ -1,5 +1,5 @@
 """Smoke tests to verify basic communication to all AWS services."""
-import botocore.session
+import botocorev063p.session
 
 from nose.tools import assert_equals
 
@@ -59,7 +59,7 @@ SMOKE_TESTS = {
 
 
 def test_can_make_request():
-    session = botocore.session.get_session()
+    session = botocorev063p.session.get_session()
     for service_name in SMOKE_TESTS:
         service = session.get_service(service_name)
         endpoint = service.get_endpoint(REGION)

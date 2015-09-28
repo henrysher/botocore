@@ -16,7 +16,7 @@ from tests import BaseSessionTest
 
 from mock import Mock
 
-from botocore.compat import OrderedDict
+from botocorev063p.compat import OrderedDict
 
 
 class TestSNSOperations(BaseSessionTest):

@@ -14,12 +14,12 @@
 from tests import unittest
 import itertools
 
-import botocore.session
+import botocorev063p.session
 
 
 class TestKinesisListStreams(unittest.TestCase):
     def setUp(self):
-        self.session = botocore.session.get_session()
+        self.session = botocorev063p.session.get_session()
         self.service = self.session.get_service('kinesis')
         self.endpoint = self.service.get_endpoint('us-east-1')
 

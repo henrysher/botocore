@@ -14,7 +14,7 @@
 # language governing permissions and limitations under the License.
 
 from tests import BaseSessionTest
-import botocore.session
+import botocorev063p.session
 
 
 class TestDirectconnectOperations(BaseSessionTest):

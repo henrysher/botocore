@@ -30,20 +30,20 @@ else:
     import unittest
 
 
-import botocore.loaders
-import botocore.session
-_LOADER = botocore.loaders.Loader()
+import botocorev063p.loaders
+import botocorev063p.session
+_LOADER = botocorev063p.loaders.Loader()
 
 
 def create_session(**kwargs):
     # Create a Session object.  By default,
     # the _LOADER object is used as the loader
     # so that we reused the same models across tests.
-    session = botocore.session.Session(**kwargs)
+    session = botocorev063p.session.Session(**kwargs)
     data_path = session.get_config_variable('data_path')
     _LOADER.data_path = data_path or ''
     session.register_component('data_loader', _LOADER)
-    session.set_config_variable('credentials_file', 'noexist/foo/botocore')
+    session.set_config_variable('credentials_file', 'noexist/foo/botocorev063p')
     return session
 
 

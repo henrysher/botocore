@@ -17,16 +17,16 @@ import logging
 import time
 import threading
 
-from botocore.vendored.requests.sessions import Session
-from botocore.vendored.requests.utils import get_environ_proxies
+from botocorev063p.vendored.requests.sessions import Session
+from botocorev063p.vendored.requests.utils import get_environ_proxies
 import six
 
-import botocore.response
-import botocore.exceptions
-from botocore.auth import AUTH_TYPE_MAPS
-from botocore.exceptions import UnknownSignatureVersionError
-from botocore.awsrequest import AWSRequest
-from botocore.compat import urljoin, json, quote
+import botocorev063p.response
+import botocorev063p.exceptions
+from botocorev063p.auth import AUTH_TYPE_MAPS
+from botocorev063p.exceptions import UnknownSignatureVersionError
+from botocorev063p.awsrequest import AWSRequest
+from botocorev063p.compat import urljoin, json, quote
 
 
 logger = logging.getLogger(__name__)
@@ -135,7 +135,7 @@ class Endpoint(object):
                          exc_info=True)
             return (None, e)
         # This returns the http_response and the parsed_data.
-        return (botocore.response.get_response(self.session, operation,
+        return (botocorev063p.response.get_response(self.session, operation,
                                                http_response), None)
 
     def _needs_retry(self, attempts, operation, response=None,
@@ -265,7 +265,7 @@ def _get_proxies(url):
 def get_endpoint(service, region_name, endpoint_url, verify=None):
     cls = SERVICE_TO_ENDPOINT.get(service.type)
     if cls is None:
-        raise botocore.exceptions.UnknownServiceStyle(
+        raise botocorev063p.exceptions.UnknownServiceStyle(
             service_style=service.type)
     service_name = getattr(service, 'signing_name', service.endpoint_prefix)
     auth = None
@@ -306,7 +306,7 @@ def _get_auth(signature_version, credentials, service_name, region_name,
         if cls.REQUIRES_REGION:
             if region_name is None:
                 envvar_name = service_object.session.session_var_map['region'][1]
-                raise botocore.exceptions.NoRegionError(env_var=envvar_name)
+                raise botocorev063p.exceptions.NoRegionError(env_var=envvar_name)
             kwargs['region_name'] = region_name
             kwargs['service_name'] = service_name
         return cls(**kwargs)

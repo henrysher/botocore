@@ -12,7 +12,7 @@
 # language governing permissions and limitations under the License.
 
 from tests import unittest
-from botocore.translate import ModelFiles, translate, merge_dicts, \
+from botocorev063p.translate import ModelFiles, translate, merge_dicts, \
                                resembles_jmespath_exp
 
 

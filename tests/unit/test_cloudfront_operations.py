@@ -14,7 +14,7 @@
 # language governing permissions and limitations under the License.
 
 from tests import unittest, BaseSessionTest
-import botocore.session
+import botocorev063p.session
 
 CREATE_DISTRIBUTION_INPUT = {
    "CallerReference": "example.com2012-04-11-5:09pm",

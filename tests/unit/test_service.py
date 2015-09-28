@@ -14,7 +14,7 @@
 
 from tests import BaseSessionTest
 
-import botocore.exceptions
+import botocorev063p.exceptions
 
 
 class TestService(BaseSessionTest):
@@ -53,7 +53,7 @@ class TestService(BaseSessionTest):
         # Only services that require the region_name (sigv4)
         # should require this param.  If we're talking to
         # a service that doesn't need this info, there's no
-        # reason to require this param in botocore.
+        # reason to require this param in botocorev063p.
         service = self.session.get_service('importexport')
         endpoint = service.get_endpoint(
             endpoint_url='https://wherever.i.want.com')
@@ -64,14 +64,14 @@ class TestService(BaseSessionTest):
         # However, if the service uses siv4 auth, then an exception
         # is raised if we call get_endpoint without a region name.
         service = self.session.get_service('cloudformation')
-        with self.assertRaises(botocore.exceptions.NoRegionError):
+        with self.assertRaises(botocorev063p.exceptions.NoRegionError):
             service.get_endpoint(endpoint_url='https://wherever.i.want.com')
 
     def test_region_required_for_non_global_endpoint(self):
         # If you don't provide an endpoint_url, than you need to
         # provide a region_name.
         service = self.session.get_service('ec2')
-        with self.assertRaises(botocore.exceptions.UnknownEndpointError):
+        with self.assertRaises(botocorev063p.exceptions.UnknownEndpointError):
             service.get_endpoint()
 
     def test_region_not_required_if_endpoint_url_given(self):

@@ -28,7 +28,7 @@ PUT and POST requests.  These bodies are either:
   to be copied into the request body.
 """
 import logging
-from botocore.compat import json
+from botocorev063p.compat import json
 
 
 logger = logging.getLogger(__name__)

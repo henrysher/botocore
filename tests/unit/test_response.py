@@ -14,10 +14,10 @@
 from tests import unittest
 
 import six
-import botocore
-from botocore import response
-from botocore.exceptions import IncompleteReadError
-from botocore.vendored.requests.models import Response, Request
+import botocorev063p
+from botocorev063p import response
+from botocorev063p.exceptions import IncompleteReadError
+from botocorev063p.vendored.requests.models import Response, Request
 
 XMLBODY1 = (b'<?xml version="1.0" encoding="UTF-8"?><Error>'
             b'<Code>AccessDenied</Code>'
@@ -73,7 +73,7 @@ class TestGetResponse(unittest.TestCase):
         http_response.status_code = 200
         http_response.reason = 'OK'
 
-        session = botocore.session.get_session()
+        session = botocorev063p.session.get_session()
         s3 = session.get_service('s3')
         operation = s3.get_operation('GetObject')
 
@@ -95,7 +95,7 @@ class TestGetResponse(unittest.TestCase):
         http_response.status_code = 403
         http_response.reason = 'Forbidden'
 
-        session = botocore.session.get_session()
+        session = botocorev063p.session.get_session()
         s3 = session.get_service('s3')
         operation = s3.get_operation('GetObject') # streaming operation
 
@@ -124,7 +124,7 @@ class TestGetResponse(unittest.TestCase):
         http_response.reason = 'Forbidden'
         http_response.request = Request()
 
-        session = botocore.session.get_session()
+        session = botocorev063p.session.get_session()
         s3 = session.get_service('s3')
         operation = s3.get_operation('ListObjects') # non-streaming operation
 
@@ -154,7 +154,7 @@ class TestGetResponse(unittest.TestCase):
         http_response.reason = 'ok'
         http_response.request = Request()
 
-        session = botocore.session.get_session()
+        session = botocorev063p.session.get_session()
         s3 = session.get_service('s3')
         operation = s3.get_operation('ListObjects') # non-streaming operation
 

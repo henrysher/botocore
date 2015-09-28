@@ -12,9 +12,9 @@
 # language governing permissions and limitations under the License.
 
 from tests import unittest
-from botocore.paginate import Paginator
-from botocore.exceptions import PaginationError
-from botocore.operation import Operation
+from botocorev063p.paginate import Paginator
+from botocorev063p.exceptions import PaginationError
+from botocorev063p.operation import Operation
 
 import mock
 

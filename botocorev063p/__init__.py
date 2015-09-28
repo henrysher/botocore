@@ -24,7 +24,7 @@ class NullHandler(logging.Handler):
         pass
 
 # Configure default logger to do nothing
-log = logging.getLogger('botocore')
+log = logging.getLogger('botocorev063p')
 log.addHandler(NullHandler())
 
 

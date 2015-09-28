@@ -19,14 +19,14 @@ import socket
 import inspect
 
 import six
-from botocore.vendored.requests import models
-from botocore.vendored.requests.sessions import REDIRECT_STATI
-from botocore.compat import HTTPHeaders, HTTPResponse
-from botocore.exceptions import UnseekableStreamError
-from botocore.vendored.requests.packages.urllib3.connection import VerifiedHTTPSConnection
-from botocore.vendored.requests.packages.urllib3.connection import HTTPConnection
-from botocore.vendored.requests.packages.urllib3.connectionpool import HTTPConnectionPool
-from botocore.vendored.requests.packages.urllib3.connectionpool import HTTPSConnectionPool
+from botocorev063p.vendored.requests import models
+from botocorev063p.vendored.requests.sessions import REDIRECT_STATI
+from botocorev063p.compat import HTTPHeaders, HTTPResponse
+from botocorev063p.exceptions import UnseekableStreamError
+from botocorev063p.vendored.requests.packages.urllib3.connection import VerifiedHTTPSConnection
+from botocorev063p.vendored.requests.packages.urllib3.connection import HTTPConnection
+from botocorev063p.vendored.requests.packages.urllib3.connectionpool import HTTPConnectionPool
+from botocorev063p.vendored.requests.packages.urllib3.connectionpool import HTTPSConnectionPool
 
 
 logger = logging.getLogger(__name__)
@@ -56,7 +56,7 @@ class AWSHTTPConnection(HTTPConnection):
     httplib.HTTPConnection) and we only override this class to support Expect
     100-continue, which we need for S3.  As far as I can tell, this is
     general purpose enough to not be specific to S3, but I'm being
-    tentative and keeping it in botocore because I've only tested
+    tentative and keeping it in botocorev063p because I've only tested
     this against AWS services.
 
     """

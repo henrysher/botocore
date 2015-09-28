@@ -20,9 +20,9 @@ import decimal
 import six
 import dateutil.parser
 
-from botocore import BotoCoreObject
-from botocore.exceptions import ValidationError, RangeError, UnknownKeyError
-from botocore.exceptions import MissingParametersError
+from botocorev063p import BotoCoreObject
+from botocorev063p.exceptions import ValidationError, RangeError, UnknownKeyError
+from botocorev063p.exceptions import MissingParametersError
 
 
 logger = logging.getLogger(__name__)

@@ -16,10 +16,10 @@ from tests import BaseSessionTest
 
 from mock import Mock, sentinel
 
-import botocore.session
-from botocore.exceptions import MissingParametersError, ValidationError
-from botocore.exceptions import UnknownParameterError
-from botocore.exceptions import UnknownKeyError
+import botocorev063p.session
+from botocorev063p.exceptions import MissingParametersError, ValidationError
+from botocorev063p.exceptions import UnknownParameterError
+from botocorev063p.exceptions import UnknownKeyError
 
 
 class TestSESOperations(BaseSessionTest):

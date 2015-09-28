@@ -14,9 +14,9 @@
 # language governing permissions and limitations under the License.
 
 from tests import unittest
-import botocore.parameters
-import botocore.payload
-from botocore.compat import json
+import botocorev063p.parameters
+import botocorev063p.payload
+from botocorev063p.compat import json
 
 XML_BODY1 = """<foobar xmlns="http://foobar.com/"><foo>value1</foo><bar>value2</bar></foobar>"""
 XML_BODY2 = """<foo>value1</foo>"""
@@ -25,18 +25,18 @@ XML_BODY2 = """<foo>value1</foo>"""
 class TestPayloads(unittest.TestCase):
 
     def test_json_payload_scalar(self):
-        payload = botocore.payload.JSONPayload()
-        p = botocore.parameters.StringParameter(None, name='foo')
+        payload = botocorev063p.payload.JSONPayload()
+        p = botocorev063p.parameters.StringParameter(None, name='foo')
         payload.add_param(p, 'value1')
-        p = botocore.parameters.StringParameter(None, name='bar')
+        p = botocorev063p.parameters.StringParameter(None, name='bar')
         payload.add_param(p, 'value2')
         json_body = json.loads(payload.getvalue())
         params = {"foo": "value1", "bar": "value2"}
         self.assertEqual(json_body, params)
 
     def test_json_payload_list(self):
-        payload = botocore.payload.JSONPayload()
-        p = botocore.parameters.ListParameter(None, name='foo',
+        payload = botocorev063p.payload.JSONPayload()
+        p = botocorev063p.parameters.ListParameter(None, name='foo',
                                               members={'type': 'string'})
         value = ['This', 'is', 'a', 'test']
         payload.add_param(p, value)
@@ -45,20 +45,20 @@ class TestPayloads(unittest.TestCase):
         self.assertEqual(json_body, params)
 
     def test_xml_payload_scalar(self):
-        payload = botocore.payload.XMLPayload(root_element_name='foobar',
+        payload = botocorev063p.payload.XMLPayload(root_element_name='foobar',
                                               namespace='http://foobar.com/')
-        p = botocore.parameters.StringParameter(None, name='foo')
+        p = botocorev063p.parameters.StringParameter(None, name='foo')
         payload.add_param(p, 'value1')
-        p = botocore.parameters.StringParameter(None, name='bar')
+        p = botocorev063p.parameters.StringParameter(None, name='bar')
         payload.add_param(p, 'value2')
         xml_body = payload.getvalue()
         self.assertEqual(xml_body, XML_BODY1)
 
     def test_xml_payload_scalar_no_root(self):
-        payload = botocore.payload.XMLPayload(root_element_name=None)
-        p = botocore.parameters.StringParameter(None, name='foo')
+        payload = botocorev063p.payload.XMLPayload(root_element_name=None)
+        p = botocorev063p.parameters.StringParameter(None, name='foo')
         payload.add_param(p, 'value1')
-        p = botocore.parameters.StringParameter(None, name='bar')
+        p = botocorev063p.parameters.StringParameter(None, name='bar')
         payload.add_param(p, 'value2')
         xml_body = payload.getvalue()
         self.assertEqual(xml_body, XML_BODY2)

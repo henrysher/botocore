@@ -14,8 +14,8 @@
 # language governing permissions and limitations under the License.
 from tests import unittest, BaseEnvVar
 import os
-import botocore.exceptions
-from botocore.config import raw_config_parse, load_config
+import botocorev063p.exceptions
+from botocorev063p.config import raw_config_parse, load_config
 
 
 def path(filename):
@@ -25,12 +25,12 @@ def path(filename):
 class TestConfig(BaseEnvVar):
 
     def test_config_not_found(self):
-        with self.assertRaises(botocore.exceptions.ConfigNotFound):
+        with self.assertRaises(botocorev063p.exceptions.ConfigNotFound):
             loaded_config = raw_config_parse(path('aws_config_notfound'))
 
     def test_config_parse_error(self):
         filename = path('aws_config_bad')
-        with self.assertRaises(botocore.exceptions.ConfigParseError):
+        with self.assertRaises(botocorev063p.exceptions.ConfigParseError):
             raw_config_parse(filename)
 
     def test_config(self):
@@ -68,7 +68,7 @@ class TestConfig(BaseEnvVar):
 
     def test_nested_bad_config(self):
         filename = path('aws_config_nested_bad')
-        with self.assertRaises(botocore.exceptions.ConfigParseError):
+        with self.assertRaises(botocorev063p.exceptions.ConfigParseError):
             loaded_config = load_config(filename)
 
 

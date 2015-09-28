@@ -15,14 +15,14 @@ from tests import unittest
 
 import mock
 
-from botocore import xform_name
-from botocore.exceptions import InvalidExpressionError, ConfigNotFound
-from botocore.utils import remove_dot_segments
-from botocore.utils import normalize_url_path
-from botocore.utils import validate_jmespath_for_set
-from botocore.utils import set_value_from_jmespath
-from botocore.utils import parse_key_val_file_contents
-from botocore.utils import parse_key_val_file
+from botocorev063p import xform_name
+from botocorev063p.exceptions import InvalidExpressionError, ConfigNotFound
+from botocorev063p.utils import remove_dot_segments
+from botocorev063p.utils import normalize_url_path
+from botocorev063p.utils import validate_jmespath_for_set
+from botocorev063p.utils import set_value_from_jmespath
+from botocorev063p.utils import parse_key_val_file_contents
+from botocorev063p.utils import parse_key_val_file
 
 
 class TestURINormalization(unittest.TestCase):

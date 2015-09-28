@@ -20,11 +20,11 @@ import difflib
 from tests import unittest, create_session
 
 from mock import Mock
-from botocore.vendored.requests.structures import CaseInsensitiveDict
+from botocorev063p.vendored.requests.structures import CaseInsensitiveDict
 
-import botocore.session
-from botocore.response import XmlResponse, JSONResponse, get_response
-from botocore.exceptions import IncompleteReadError
+import botocorev063p.session
+from botocorev063p.response import XmlResponse, JSONResponse, get_response
+from botocorev063p.exceptions import IncompleteReadError
 
 log = logging.getLogger(__name__)
 
@@ -99,7 +99,7 @@ def test_json_parsing():
     input_path = os.path.join(input_path, 'inputs')
     output_path = os.path.join(os.path.dirname(__file__), 'json')
     output_path = os.path.join(output_path, 'outputs')
-    session = botocore.session.get_session()
+    session = botocorev063p.session.get_session()
     jsonfiles = glob.glob('%s/*.json' % input_path)
     service_names = set()
     for fn in jsonfiles:
@@ -142,7 +142,7 @@ class TestHeaderParsing(unittest.TestCase):
     maxDiff = None
 
     def setUp(self):
-        self.session = botocore.session.get_session()
+        self.session = botocorev063p.session.get_session()
         self.s3 = self.session.get_service('s3')
 
     def test_put_object(self):

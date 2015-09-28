@@ -1,11 +1,11 @@
 import glob
 import os
 
-from botocore import BOTOCORE_ROOT
-from botocore.compat import json
-from botocore.compat import OrderedDict
-from botocore.exceptions import ApiVersionNotFoundError
-from botocore.exceptions import DataNotFoundError
+from botocorev063p import BOTOCORE_ROOT
+from botocorev063p.compat import json
+from botocorev063p.compat import OrderedDict
+from botocorev063p.exceptions import ApiVersionNotFoundError
+from botocorev063p.exceptions import DataNotFoundError
 
 
 def cachable(func):
@@ -82,7 +82,7 @@ class JSONFileLoader(object):
 
 class Loader(object):
     """
-    Intelligently loads the data botocore needs.
+    Intelligently loads the data botocorev063p needs.
 
     Handles listing the available services, loading service data & loading
     arbitrary data.
@@ -142,18 +142,18 @@ class Loader(object):
         Usage::
 
             # Default:
-            >>> loader = Loader('/path/to/botocore/data')
+            >>> loader = Loader('/path/to/botocorev063p/data')
             >>> loader.get_search_paths()
             [
-                '/path/to/botocore/data',
+                '/path/to/botocorev063p/data',
             ]
 
             # User-added paths
-            >>> loader = Loader('~/.botocore/my_overrides:/path/to/botocore/data')
+            >>> loader = Loader('~/.botocorev063p/my_overrides:/path/to/botocorev063p/data')
             >>> loader.get_search_paths()
             [
-                '/home/somebody/.botocore/my_overrides',
-                '/path/to/botocore/data',
+                '/home/somebody/.botocorev063p/my_overrides',
+                '/path/to/botocorev063p/data',
             ]
 
         """
@@ -172,7 +172,7 @@ class Loader(object):
                 path = os.path.expanduser(path)
                 paths.append(path)
 
-        # Automatically add ./botocore/data to the end of the
+        # Automatically add ./botocorev063p/data to the end of the
         # data search path.
         paths.append(os.path.join(BOTOCORE_ROOT, 'data'))
         return paths
@@ -187,7 +187,7 @@ class Loader(object):
 
         Usage::
 
-            >>> loader = Loader('/path/to/botocore/data')
+            >>> loader = Loader('/path/to/botocorev063p/data')
             >>> loader.load_data('aws/ec2/2013-02-01')
             {
                 # ...EC2 service data...
@@ -228,7 +228,7 @@ class Loader(object):
         Requires a ``data_path`` parameter, which should be a string. This
         indicates the desired path to load, seperated by slashes. It should
         **NOT** include absolute path information nor file extensions. (i.e.
-        ``aws/ec2``, not ``/botocore/data/aws/ec2/2010-01-01.json``)
+        ``aws/ec2``, not ``/botocorev063p/data/aws/ec2/2010-01-01.json``)
 
         Optionally accepts an ``api_version`` parameter, which should be a
         string of the desired API version. This is used when you want to pin to
@@ -240,7 +240,7 @@ class Loader(object):
 
         Usage::
 
-            >>> loader = Loader('/path/to/botocore/data')
+            >>> loader = Loader('/path/to/botocorev063p/data')
             >>> loader.load_service_model('aws/ec2')
             {
                 # The latest EC2 service data...
@@ -275,7 +275,7 @@ class Loader(object):
 
         Usage::
 
-            >>> loader = Loader('/path/to/botocore/data')
+            >>> loader = Loader('/path/to/botocorev063p/data')
             >>> loader.list_available_services('aws')
             [
                 'autoscaling',
@@ -306,7 +306,7 @@ class Loader(object):
         Requires a ``data_path`` parameter, which should be a string. This
         indicates the desired path to load, seperated by slashes. It should
         **NOT** include absolute path information nor file extensions. (i.e.
-        ``aws/ec2``, not ``/botocore/data/aws/ec2/2010-01-01.json``)
+        ``aws/ec2``, not ``/botocorev063p/data/aws/ec2/2010-01-01.json``)
 
         Optionally accepts an ``api_version`` parameter, which should be a
         string of the desired API version. This is used when you want to pin to
@@ -321,7 +321,7 @@ class Loader(object):
 
         Usage::
 
-            >>> loader = Loader('~/.botocore/my_overrides:/path/to/botocore/data')
+            >>> loader = Loader('~/.botocorev063p/my_overrides:/path/to/botocorev063p/data')
 
             # Just grabs the latest.
             >>> loader.determine_latest('aws/rds')

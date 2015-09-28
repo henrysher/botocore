@@ -18,8 +18,8 @@ import os
 
 import mock
 
-import botocore.session
-import botocore.exceptions
+import botocorev063p.session
+import botocorev063p.exceptions
 
 
 class TestConfig(BaseSessionTest):
@@ -29,11 +29,11 @@ class TestConfig(BaseSessionTest):
         super(TestConfig, self).setUp(BOTO_DATA_PATH=data_path)
 
     def test_data_not_found(self):
-        self.assertRaises(botocore.exceptions.DataNotFoundError,
+        self.assertRaises(botocorev063p.exceptions.DataNotFoundError,
                           self.session.get_data, 'bar')
 
     def test_data_bad(self):
-        self.assertRaises(botocore.exceptions.DataNotFoundError,
+        self.assertRaises(botocorev063p.exceptions.DataNotFoundError,
                           self.session.get_data, 'baz')
 
     def test_all_data(self):
@@ -64,7 +64,7 @@ class TestConfig(BaseSessionTest):
         self.assertEqual(data['test_key_1'], 'test_value_1')
 
     def test_subdir_not_found(self):
-        self.assertRaises(botocore.exceptions.DataNotFoundError,
+        self.assertRaises(botocorev063p.exceptions.DataNotFoundError,
                           self.session.get_data, 'sub/foo')
 
 

@@ -14,12 +14,12 @@
 import unittest
 import itertools
 
-import botocore.session
+import botocorev063p.session
 
 
 class TestRDSPagination(unittest.TestCase):
     def setUp(self):
-        self.session = botocore.session.get_session()
+        self.session = botocorev063p.session.get_session()
         self.service = self.session.get_service('rds')
         self.endpoint = self.service.get_endpoint('us-west-2')
 

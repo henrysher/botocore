@@ -12,8 +12,8 @@
 # language governing permissions and limitations under the License.
 
 from tests import BaseSessionTest
-from botocore import endpoint
-from botocore.exceptions import WaiterError
+from botocorev063p import endpoint
+from botocorev063p.exceptions import WaiterError
 import mock
 
 

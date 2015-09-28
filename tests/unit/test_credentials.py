@@ -18,10 +18,10 @@ import json
 import mock
 import os
 
-from botocore import credentials
-import botocore.exceptions
-import botocore.session
-from botocore.vendored.requests import ConnectionError
+from botocorev063p import credentials
+import botocorev063p.exceptions
+import botocorev063p.session
+from botocorev063p.vendored.requests import ConnectionError
 
 from tests import unittest, BaseEnvVar, create_session
 
@@ -195,7 +195,7 @@ class TestEnvVar(BaseEnvVar):
             # Missing the AWS_SECRET_ACCESS_KEY
         }
         provider = credentials.EnvProvider(environ)
-        with self.assertRaises(botocore.exceptions.PartialCredentialsError):
+        with self.assertRaises(botocorev063p.exceptions.PartialCredentialsError):
             creds = provider.load()
 
 
@@ -231,7 +231,7 @@ class TestSharedCredentialsProvider(BaseEnvVar):
         provider = credentials.SharedCredentialProvider(
             creds_filename='~/.aws/creds', profile_name='default',
             ini_parser=self.ini_parser)
-        with self.assertRaises(botocore.exceptions.PartialCredentialsError):
+        with self.assertRaises(botocorev063p.exceptions.PartialCredentialsError):
             provider.load()
 
     def test_credentials_file_exists_with_session_token(self):
@@ -280,7 +280,7 @@ class TestSharedCredentialsProvider(BaseEnvVar):
     def test_credentials_file_does_not_exist_returns_none(self):
         # It's ok if the credentials file does not exist, we should
         # just catch the appropriate errors and return None.
-        self.ini_parser.side_effect = botocore.exceptions.ConfigNotFound(
+        self.ini_parser.side_effect = botocorev063p.exceptions.ConfigNotFound(
             path='foo')
         provider = credentials.SharedCredentialProvider(
             creds_filename='~/.aws/creds', profile_name='dev',
@@ -328,7 +328,7 @@ class TestConfigFileProvider(BaseEnvVar):
     def test_config_file_errors_ignored(self):
         # We should move on to the next provider if the config file
         # can't be found.
-        self.parser.side_effect = botocore.exceptions.ConfigNotFound(
+        self.parser.side_effect = botocorev063p.exceptions.ConfigNotFound(
             path='cli.cfg')
         provider = credentials.ConfigProvider('cli.cfg', 'default',
                                               self.parser)
@@ -344,7 +344,7 @@ class TestConfigFileProvider(BaseEnvVar):
         parser = mock.Mock()
         parser.return_value = parsed
         provider = credentials.ConfigProvider('cli.cfg', 'default', parser)
-        with self.assertRaises(botocore.exceptions.PartialCredentialsError):
+        with self.assertRaises(botocorev063p.exceptions.PartialCredentialsError):
             provider.load()
 
 
@@ -398,7 +398,7 @@ class TestBotoProvider(BaseEnvVar):
         self.ini_parser.assert_called_with('alternate-config.cfg')
 
     def test_no_boto_config_file_exists(self):
-        self.ini_parser.side_effect = botocore.exceptions.ConfigNotFound(
+        self.ini_parser.side_effect = botocorev063p.exceptions.ConfigNotFound(
             path='foo')
         provider = credentials.BotoProvider(environ={},
                                             ini_parser=self.ini_parser)
@@ -415,7 +415,7 @@ class TestBotoProvider(BaseEnvVar):
         }
         provider = credentials.BotoProvider(environ={},
                                             ini_parser=ini_parser)
-        with self.assertRaises(botocore.exceptions.PartialCredentialsError):
+        with self.assertRaises(botocorev063p.exceptions.PartialCredentialsError):
             creds = provider.load()
 
 
@@ -563,7 +563,7 @@ class CredentialResolverTest(BaseEnvVar):
         resolver.remove('providerFOO')
         # But an error IS raised if you try to insert after an unknown
         # provider.
-        with self.assertRaises(botocore.exceptions.UnknownCredentialError):
+        with self.assertRaises(botocorev063p.exceptions.UnknownCredentialError):
             resolver.insert_after('providerFoo', None)
 
 

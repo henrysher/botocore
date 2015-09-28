@@ -15,7 +15,7 @@ from tests import unittest
 import functools
 import random
 
-import botocore.session
+import botocorev063p.session
 
 DEFAULT_ROLE_POLICY = """\
 {"Statement": [
@@ -32,7 +32,7 @@ DEFAULT_ROLE_POLICY = """\
 
 class TestElasticTranscoder(unittest.TestCase):
     def setUp(self):
-        self.session = botocore.session.get_session()
+        self.session = botocorev063p.session.get_session()
         self.service = self.session.get_service('elastictranscoder')
         self.endpoint = self.service.get_endpoint('us-east-1')
 
@@ -81,7 +81,7 @@ class TestElasticTranscoder(unittest.TestCase):
         input_bucket = self.create_bucket()
         output_bucket = self.create_bucket()
         role = self.create_iam_role()
-        pipeline_name = 'botocore-test-create-%s' % (random.randint(1, 1000000))
+        pipeline_name = 'botocorev063p-test-create-%s' % (random.randint(1, 1000000))
 
         operation = self.service.get_operation('CreatePipeline')
         http, parsed = operation.call(

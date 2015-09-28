@@ -14,16 +14,16 @@
 from tests import unittest, BaseSessionTest, create_session
 
 from mock import Mock, patch, sentinel
-from botocore.vendored.requests import ConnectionError
+from botocorev063p.vendored.requests import ConnectionError
 import six
 
-from botocore.endpoint import get_endpoint, QueryEndpoint, JSONEndpoint, \
+from botocorev063p.endpoint import get_endpoint, QueryEndpoint, JSONEndpoint, \
     RestEndpoint, DEFAULT_TIMEOUT
-from botocore.auth import SigV4Auth
-from botocore.session import Session
-from botocore.exceptions import UnknownServiceStyle
-from botocore.exceptions import UnknownSignatureVersionError
-from botocore.payload import Payload
+from botocorev063p.auth import SigV4Auth
+from botocorev063p.session import Session
+from botocorev063p.exceptions import UnknownServiceStyle
+from botocorev063p.exceptions import UnknownSignatureVersionError
+from botocorev063p.payload import Payload
 
 
 class RecordStreamResets(six.StringIO):
@@ -152,7 +152,7 @@ class TestEndpointBase(unittest.TestCase):
 
     def setUp(self):
         self.service = Mock()
-        self.service.session.user_agent.return_value = 'botocore-test'
+        self.service.session.user_agent.return_value = 'botocorev063p-test'
         self.service.session.emit_first_non_none_response.return_value = None
         self.op = Mock()
         self.op.is_streaming.return_value = False
@@ -164,7 +164,7 @@ class TestEndpointBase(unittest.TestCase):
         self.http_session = Mock()
         self.http_session.send.return_value = sentinel.HTTP_RETURN_VALUE
         self.endpoint.http_session = self.http_session
-        self.get_response_patch = patch('botocore.response.get_response')
+        self.get_response_patch = patch('botocorev063p.response.get_response')
         self.get_response = self.get_response_patch.start()
 
     def tearDown(self):
@@ -308,7 +308,7 @@ class TestRetryInterface(BaseSessionTest):
             auth=self.auth)
         self.http_session = Mock()
         self.endpoint.http_session = self.http_session
-        self.get_response_patch = patch('botocore.response.get_response')
+        self.get_response_patch = patch('botocorev063p.response.get_response')
         self.get_response = self.get_response_patch.start()
         self.retried_on_exception = None
 
@@ -379,7 +379,7 @@ class TestS3ResetStreamOnRetry(unittest.TestCase):
             auth=self.auth)
         self.http_session = Mock()
         self.endpoint.http_session = self.http_session
-        self.get_response_patch = patch('botocore.response.get_response')
+        self.get_response_patch = patch('botocorev063p.response.get_response')
         self.get_response = self.get_response_patch.start()
         self.retried_on_exception = None
 
@@ -425,7 +425,7 @@ class TestS3Retry200SpecialCases(unittest.TestCase):
             auth=self.auth)
         self.http_session = Mock()
         self.endpoint.http_session = self.http_session
-        self.get_response_patch = patch('botocore.response.get_response')
+        self.get_response_patch = patch('botocorev063p.response.get_response')
         self.get_response = self.get_response_patch.start()
         self.retried_on_exception = None
 

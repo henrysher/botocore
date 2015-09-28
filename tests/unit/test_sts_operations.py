@@ -19,8 +19,8 @@ import mock
 
 from tests import BaseSessionTest
 
-import botocore.session
-from botocore.exceptions import NoCredentialsError
+import botocorev063p.session
+from botocorev063p.exceptions import NoCredentialsError
 
 LOG = logging.getLogger(__name__)
 
@@ -76,7 +76,7 @@ class NoCredentialsTest(TestSTSOperationsWithCreds):
             'credential_provider', resolver)
 
     def test_get_session_token(self):
-        session = botocore.session.get_session()
+        session = botocorev063p.session.get_session()
         sns = session.get_service('sts')
         op = sns.get_operation('GetSessionToken')
         params = {}
@@ -85,7 +85,7 @@ class NoCredentialsTest(TestSTSOperationsWithCreds):
             endpoint.make_request(op, params)
 
     def test_assume_role_with_saml(self):
-        session = botocore.session.get_session()
+        session = botocorev063p.session.get_session()
         sns = session.get_service('sts')
         op = sns.get_operation('AssumeRoleWithSAML')
         self.assertEqual(op.signature_version, None)

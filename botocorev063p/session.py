@@ -12,7 +12,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 """
-This module contains the main interface to the botocore package, the
+This module contains the main interface to the botocorev063p package, the
 Session object.
 """
 
@@ -22,22 +22,22 @@ import os
 import platform
 import shlex
 
-from botocore import __version__
-import botocore.config
-import botocore.credentials
-from botocore.exceptions import EventNotFound, ConfigNotFound, ProfileNotFound
-from botocore import handlers
-from botocore.hooks import HierarchicalEmitter, first_non_none_response
-from botocore.loaders import Loader
-from botocore.provider import get_provider
-from botocore import regions
-import botocore.service
+from botocorev063p import __version__
+import botocorev063p.config
+import botocorev063p.credentials
+from botocorev063p.exceptions import EventNotFound, ConfigNotFound, ProfileNotFound
+from botocorev063p import handlers
+from botocorev063p.hooks import HierarchicalEmitter, first_non_none_response
+from botocorev063p.loaders import Loader
+from botocorev063p.provider import get_provider
+from botocorev063p import regions
+import botocorev063p.service
 
 
 class Session(object):
     """
     The Session object collects together useful functionality
-    from `botocore` as well as important data such as configuration
+    from `botocorev063p` as well as important data such as configuration
     information and credentials into a single, easy-to-use object.
 
     :ivar available_profiles: A list of profiles defined in the config
@@ -92,7 +92,7 @@ class Session(object):
     When creating a new Session object, you can pass in your own dictionary to
     remap the logical names or to add new logical names.  You can then get the
     current value for these variables by using the ``get_config_variable``
-    method of the :class:`botocore.session.Session` class.
+    method of the :class:`botocorev063p.session.Session` class.
     The default set of logical variable names are:
 
     * profile - Default profile name you want to use.
@@ -174,7 +174,7 @@ class Session(object):
     def _register_credential_provider(self):
         self._components.lazy_register_component(
             'credential_provider',
-            lambda:  botocore.credentials.create_credential_resolver(self))
+            lambda:  botocorev063p.credentials.create_credential_resolver(self))
 
     def _register_data_loader(self):
         self._components.lazy_register_component(
@@ -366,7 +366,7 @@ class Session(object):
         if self._config is None:
             try:
                 config_file = self.get_config_variable('config_file')
-                self._config = botocore.config.load_config(config_file)
+                self._config = botocorev063p.config.load_config(config_file)
             except ConfigNotFound:
                 self._config = {'profiles': {}}
             try:
@@ -376,7 +376,7 @@ class Session(object):
                 # can validate the user is not referring to a nonexistent  
                 # profile.
                 cred_file = self.get_config_variable('credentials_file')
-                cred_profiles = botocore.config.raw_config_parse(cred_file)
+                cred_profiles = botocorev063p.config.raw_config_parse(cred_file)
                 for profile in cred_profiles:
                     if profile not in self._config['profiles']:
                         self._config['profiles'][profile] = {}
@@ -387,7 +387,7 @@ class Session(object):
     def set_credentials(self, access_key, secret_key, token=None):
         """
         Manually create credentials for this session.  If you would
-        prefer to use botocore without a config file, environment variables,
+        prefer to use botocorev063p without a config file, environment variables,
         or IAM roles, you can pass explicit credentials into this
         method to establish credentials for this session.
 
@@ -401,13 +401,13 @@ class Session(object):
         :param token: An option session token used by STS session
             credentials.
         """
-        self._credentials = botocore.credentials.Credentials(access_key,
+        self._credentials = botocorev063p.credentials.Credentials(access_key,
                                                              secret_key,
                                                              token)
 
     def get_credentials(self):
         """
-        Return the :class:`botocore.credential.Credential` object
+        Return the :class:`botocorev063p.credential.Credential` object
         associated with this session.  If the credentials have not
         yet been loaded, this will attempt to load them.  If they
         have already been loaded, this will return the cached
@@ -431,7 +431,7 @@ class Session(object):
          - agent_name is the value of the `user_agent_name` attribute
            of the session object (`Boto` by default).
          - agent_version is the value of the `user_agent_version`
-           attribute of the session object (the botocore version by default).
+           attribute of the session object (the botocorev063p version by default).
            by default.
          - py_ver is the version of the Python interpreter beng used.
          - plat_name is the name of the platform (e.g. Darwin)
@@ -488,16 +488,16 @@ class Session(object):
         :type service_name: str
         :param service_name: The name of the service (e.g. 'ec2')
 
-        :returns: :class:`botocore.service.Service`
+        :returns: :class:`botocorev063p.service.Service`
         """
-        service = botocore.service.get_service(self, service_name,
+        service = botocorev063p.service.get_service(self, service_name,
                                                self.provider,
                                                api_version=api_version)
         event = self.create_event('service-created')
         self._events.emit(event, service=service)
         return service
 
-    def set_debug_logger(self, logger_name='botocore'):
+    def set_debug_logger(self, logger_name='botocorev063p'):
         """
         Convenience function to quickly configure full debug output
         to go to the console.
@@ -544,7 +544,7 @@ class Session(object):
         # add ch to logger
         log.addHandler(ch)
 
-    def set_file_logger(self, log_level, path, logger_name='botocore'):
+    def set_file_logger(self, log_level, path, logger_name='botocorev063p'):
         """
         Convenience function to quickly configure any level of logging
         to a file.

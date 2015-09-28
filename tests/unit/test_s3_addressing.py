@@ -18,8 +18,8 @@ import os
 from tests import BaseSessionTest
 from mock import patch, Mock
 
-import botocore.session
-from botocore.exceptions import ServiceNotInRegionError
+import botocorev063p.session
+from botocorev063p.exceptions import ServiceNotInRegionError
 
 
 class TestS3Addressing(BaseSessionTest):
@@ -28,7 +28,7 @@ class TestS3Addressing(BaseSessionTest):
         super(TestS3Addressing, self).setUp()
         self.s3 = self.session.get_service('s3')
 
-    @patch('botocore.response.get_response', Mock())
+    @patch('botocorev063p.response.get_response', Mock())
     def get_prepared_request(self, op, param):
         request = []
         self.endpoint._send_request = lambda prepared_request, operation: \

@@ -16,7 +16,7 @@
 from tests import BaseSessionTest
 import base64
 import six
-import botocore.session
+import botocorev063p.session
 
 
 class TestEC2Operations(BaseSessionTest):

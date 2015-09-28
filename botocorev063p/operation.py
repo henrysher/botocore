@@ -13,12 +13,12 @@
 # language governing permissions and limitations under the License.
 
 import logging
-from botocore.parameters import get_parameter
-from botocore.exceptions import MissingParametersError
-from botocore.exceptions import UnknownParameterError
-from botocore.paginate import Paginator
-from botocore.payload import Payload, XMLPayload, JSONPayload
-from botocore import BotoCoreObject, xform_name
+from botocorev063p.parameters import get_parameter
+from botocorev063p.exceptions import MissingParametersError
+from botocorev063p.exceptions import UnknownParameterError
+from botocorev063p.paginate import Paginator
+from botocorev063p.payload import Payload, XMLPayload, JSONPayload
+from botocorev063p import BotoCoreObject, xform_name
 
 logger = logging.getLogger(__name__)
 

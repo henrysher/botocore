@@ -15,8 +15,8 @@
 from decimal import Decimal
 from tests import TestParamSerialization
 
-import botocore.session
-from botocore.exceptions import ValidationError
+import botocorev063p.session
+from botocorev063p.exceptions import ValidationError
 
 
 class TestCloudwatchOperations(TestParamSerialization):

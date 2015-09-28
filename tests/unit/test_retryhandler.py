@@ -16,11 +16,11 @@
 from tests import unittest
 
 import mock
-from botocore.vendored.requests import ConnectionError, Timeout
-from botocore.vendored.requests.packages.urllib3.exceptions import ClosedPoolError
+from botocorev063p.vendored.requests import ConnectionError, Timeout
+from botocorev063p.vendored.requests.packages.urllib3.exceptions import ClosedPoolError
 
-from botocore import retryhandler
-from botocore.exceptions import ChecksumError
+from botocorev063p import retryhandler
+from botocorev063p.exceptions import ChecksumError
 
 
 HTTP_500_RESPONSE = mock.Mock()

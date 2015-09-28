@@ -14,12 +14,12 @@
 import unittest
 import itertools
 
-import botocore.session
+import botocorev063p.session
 
 
 class TestEC2(unittest.TestCase):
     def setUp(self):
-        self.session = botocore.session.get_session()
+        self.session = botocorev063p.session.get_session()
 
     def test_can_make_request(self):
         # Basic smoke test to ensure we can talk to ec2.
@@ -33,7 +33,7 @@ class TestEC2(unittest.TestCase):
 
 class TestEC2Pagination(unittest.TestCase):
     def setUp(self):
-        self.session = botocore.session.get_session()
+        self.session = botocorev063p.session.get_session()
         self.service = self.session.get_service('ec2')
         self.endpoint = self.service.get_endpoint('us-west-2')
 

@@ -23,12 +23,12 @@ import os
 
 import mock
 
-from botocore.exceptions import ApiVersionNotFoundError
-from botocore.exceptions import DataNotFoundError
-from botocore.loaders import cachable
-from botocore.loaders import JSONFileLoader
-from botocore.loaders import Loader
-import botocore.session
+from botocorev063p.exceptions import ApiVersionNotFoundError
+from botocorev063p.exceptions import DataNotFoundError
+from botocorev063p.loaders import cachable
+from botocorev063p.loaders import JSONFileLoader
+from botocorev063p.loaders import Loader
+import botocorev063p.session
 
 from tests import unittest, BaseEnvVar
 
@@ -154,7 +154,7 @@ class LoaderTestCase(BaseEnvVar):
     def test_search_path_on_windows(self):
         # On windows, the search path is separated by ';' chars.
         self.environ['BOTO_DATA_PATH'] = 'c:\\path1;c:\\path2'
-        # The builtin botocore data path is added as the last element
+        # The builtin botocorev063p data path is added as the last element
         # so we're only interested in checking the two that we've added.
         loader = Loader(data_path=self.environ['BOTO_DATA_PATH'])
         paths = loader.get_search_paths()[:-1]

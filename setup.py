@@ -5,7 +5,7 @@ distutils/setuptools install script.
 """
 
 import sys
-import botocore
+import botocorev063p
 
 from setuptools import setup, find_packages
 
@@ -29,18 +29,18 @@ if sys.version_info[:2] == (2, 6):
 
 
 setup(
-    name='botocore',
-    version=botocore.__version__,
+    name='botocorev063p',
+    version=botocorev063p.__version__,
     description='Low-level, data-driven core of boto 3.',
     long_description=open('README.rst').read(),
     author='Mitch Garnaat',
     author_email='garnaat@amazon.com',
-    url='https://github.com/boto/botocore',
+    url='https://github.com/boto/botocorev063p',
     scripts=[],
     packages=find_packages(exclude=['tests*']),
-    package_data={'botocore': ['data/*.json', 'data/aws/*.json'],
-                  'botocore.vendored.requests': ['*.pem']},
-    package_dir={'botocore': 'botocore'},
+    package_data={'botocorev063p': ['data/*.json', 'data/aws/*.json'],
+                  'botocorev063p.vendored.requests': ['*.pem']},
+    package_dir={'botocorev063p': 'botocorev063p'},
     include_package_data=True,
     install_requires=requires,
     license=open("LICENSE.txt").read(),

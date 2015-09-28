@@ -19,9 +19,9 @@ from copy import deepcopy
 
 import jmespath
 
-from botocore.compat import OrderedDict, json
-from botocore.utils import merge_dicts
-from botocore import xform_name
+from botocorev063p.compat import OrderedDict, json
+from botocorev063p.utils import merge_dicts
+from botocorev063p import xform_name
 
 
 class ModelFiles(object):
@@ -188,7 +188,7 @@ def handle_rename_params(new_model, enhancements):
         'renames', {})
     if not renames:
         return
-    # This is *extremely* specific to botocore's translations, but
+    # This is *extremely* specific to botocorev063p's translations, but
     # we support a restricted set of argument renames based on a
     # jmespath expression.
     for expression, new_value in renames.items():

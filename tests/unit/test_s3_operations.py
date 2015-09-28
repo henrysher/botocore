@@ -16,7 +16,7 @@
 import os
 from tests import BaseSessionTest
 import mock
-import botocore.session
+import botocorev063p.session
 
 XMLBODY1 = ('<CreateBucketConfiguration><LocationConstraint>sa-east-1'
             '</LocationConstraint></CreateBucketConfiguration>')

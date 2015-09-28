@@ -24,15 +24,15 @@ try:
 except ImportError:
     from itertools import zip_longest
 
-import botocore.session
-import botocore.auth
-import botocore.credentials
-import botocore.vendored.requests as requests
+import botocorev063p.session
+import botocorev063p.auth
+import botocorev063p.credentials
+import botocorev063p.vendored.requests as requests
 
 
 class BaseS3Test(unittest.TestCase):
     def setUp(self):
-        self.session = botocore.session.get_session()
+        self.session = botocorev063p.session.get_session()
         self.service = self.session.get_service('s3')
         self.endpoint = self.service.get_endpoint('us-east-1')
         self.keys = []
@@ -99,7 +99,7 @@ class BaseS3Test(unittest.TestCase):
 class TestS3BaseWithBucket(BaseS3Test):
     def setUp(self):
         super(TestS3BaseWithBucket, self).setUp()
-        self.bucket_name = 'botocoretest%s-%s' % (
+        self.bucket_name = 'botocorev063ptest%s-%s' % (
             int(time.time()), random.randint(1, 1000))
         self.bucket_location = 'us-west-2'
 
@@ -352,7 +352,7 @@ class TestS3Regions(BaseS3Test):
         shutil.rmtree(self.tempdir)
 
     def create_bucket_in_region(self, region):
-        bucket_name = 'botocoretest%s-%s' % (
+        bucket_name = 'botocorev063ptest%s-%s' % (
             int(time.time()), random.randint(1, 1000))
         operation = self.service.get_operation('CreateBucket')
         response, parsed = operation.call(
@@ -432,7 +432,7 @@ class TestS3Copy(TestS3BaseWithBucket):
 class TestS3Presign(BaseS3Test):
     def setUp(self):
         super(TestS3Presign, self).setUp()
-        self.bucket_name = 'botocoretest%s-%s' % (
+        self.bucket_name = 'botocorev063ptest%s-%s' % (
             int(time.time()), random.randint(1, 1000))
 
         operation = self.service.get_operation('CreateBucket')
@@ -450,7 +450,7 @@ class TestS3Presign(BaseS3Test):
     def test_can_retrieve_presigned_object(self):
         key_name = 'mykey'
         self.create_object(key_name=key_name, body='foobar')
-        signer = botocore.auth.S3SigV4QueryAuth(
+        signer = botocorev063p.auth.S3SigV4QueryAuth(
             credentials=self.service.session.get_credentials(),
             region_name='us-east-1', service_name='s3', expires=60)
         op = self.service.get_operation('GetObject')
@@ -467,7 +467,7 @@ class TestS3PresignFixHost(BaseS3Test):
         endpoint = self.service.get_endpoint('us-west-2')
         key_name = 'mykey'
         bucket_name = 'mybucket'
-        signer = botocore.auth.S3SigV4QueryAuth(
+        signer = botocorev063p.auth.S3SigV4QueryAuth(
             credentials=self.service.session.get_credentials(),
             region_name='us-west-2', service_name='s3', expires=60)
         op = self.service.get_operation('GetObject')
@@ -484,7 +484,7 @@ class TestS3PresignFixHost(BaseS3Test):
 class TestCreateBucketInOtherRegion(BaseS3Test):
     def setUp(self):
         super(TestCreateBucketInOtherRegion, self).setUp()
-        self.bucket_name = 'botocoretest%s-%s' % (
+        self.bucket_name = 'botocorev063ptest%s-%s' % (
             int(time.time()), random.randint(1, 1000))
         self.bucket_location = 'us-west-2'
 
