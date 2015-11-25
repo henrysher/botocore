@@ -17,7 +17,7 @@ import os
 import re
 from copy import deepcopy
 
-import jmespath
+import jmespathv041p as jmespath
 
 from botocorev063p.compat import OrderedDict, json
 from botocorev063p.utils import merge_dicts

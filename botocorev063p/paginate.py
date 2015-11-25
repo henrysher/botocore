@@ -13,7 +13,7 @@
 
 from itertools import tee
 
-import jmespath
+import jmespathv041p as jmespath
 from botocorev063p.exceptions import PaginationError
 from botocorev063p.compat import zip
 from botocorev063p.utils import set_value_from_jmespath, merge_dicts
